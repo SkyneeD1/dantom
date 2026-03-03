@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dantom Group - Excelência em Soluções Corporativas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Dantom Palette */
+            --bg-body: #0d120f;
+            --bg-surface: #131b16;
+            --primary: #DEB353;
+            --primary-hover: #e8c675;
+            --text-main: #FFFFFF;
+            --text-muted: #9ba8a0;
+            --border-color: rgba(222, 179, 83, 0.15);
+            --gradient-accent: radial-gradient(circle at top, rgba(222, 179, 83, 0.1) 0%, rgba(13, 18, 15, 0) 50%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.5;
+            background-image: var(--gradient-accent);
+            background-attachment: fixed;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Globals & Utils */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .pill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .pill-tag .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            border-radius: 50px;
+            /* Pill shape */
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            gap: 12px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #111;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(222, 179, 83, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Header */
+        header {
+            padding: 24px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon i {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-main);
+            transition: color 0.2s;
+        }
+
+        .menu-toggle:hover {
+            color: var(--primary);
+        }
+
+        /* Chatbot Widget AI */
+        #chatbot-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        #chatbot-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(222, 179, 83, 0.4);
+            transition: transform 0.3s;
+        }
+
+        #chatbot-btn:hover {
+            transform: scale(1.1);
+        }
+
+        #chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 480px;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        #chatbot-window.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .chat-header {
+            background-color: #1a241e;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chat-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+        }
+
+        .chat-header .close-btn {
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .msg {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            max-width: 85%;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+
+        .msg.bot {
+            background-color: #212c25;
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+
+        .msg.user {
+            background-color: var(--primary);
+            color: #111;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+            font-weight: 600;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 15px;
+            background-color: #1a241e;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            outline: none;
+            font-family: inherit;
+        }
+
+        .chat-input-area button {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero */
+        .social-icons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            line-height: 1.05;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 500px;
+            margin-bottom: 40px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: 90%;
+            height: auto;
+            border-radius: 24px;
+            /* Adjust if the actual 3D icon has no background */
+        }
+
+        /* Awards / Strip */
+        .awards {
+            background-color: #FFFFFF;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .awards-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .awards h3 {
+            font-size: 1.1rem;
+            color: var(--bg-body);
+            /* Verde original do fundo servindo como texto */
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+        }
+
+        .awards h3 i {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        /* About Us Section */
+        .about {
+            padding: 80px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-heading {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 80px;
+            letter-spacing: -1px;
+        }
+
+        .about-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 60px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-video {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .about-video img {
+            width: 100%;
+            display: block;
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .about-text {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+
+        /* Services Accordion */
+        .services {
+            padding: 140px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .hero-image,
+        .hero-video {
+            width: 100%;
+            max-width: 800px;
+            display: block;
+            margin-left: auto;
+            transform: scale(1.1);
+            /* Reduzido 15% a partir do 1.30 */
+            transform-origin: center right;
+            /* Fundo transparente dispensa bordas/sombras visíveis */
+        }
+
+        .services-image {
+            width: 100%;
+            border-radius: 20px;
+            max-width: 550px;
+            margin: 0 auto;
+            display: block;
+            transform: scale(1.05);
+            /* Slight overall increase */
+        }
+
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 32px;
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .accordion-header h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .accordion-icon {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .accordion-item.active .accordion-header h3 {
+            color: var(--primary);
+        }
+
+        .accordion-item.active .accordion-icon {
+            color: var(--primary);
+        }
+
+        .accordion-content {
+            display: none;
+            padding-top: 16px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            max-width: 90%;
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        /* Portfolio */
+        .portfolio {
+            padding: 80px 0;
+        }
+
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+        }
+
+        .portfolio-header h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            max-width: 600px;
+        }
+
+        .view-all {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .view-all:hover {
+            color: var(--primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .portfolio-card {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background: var(--bg-surface);
+            aspect-ratio: 4/5;
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: transform 0.5s ease, opacity 0.5s;
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        /* Reviews */
+        .reviews {
+            padding: 120px 0;
+            background-color: var(--bg-surface);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .quote-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .author-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+
+            .hero-container,
+            .about-grid,
+            .services-grid,
+            .reviews-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .about-heading {
+                font-size: 2.5rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-surface);
+                padding: 20px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+                z-index: 1000;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .social-icons {
+                display: none;
+                /* Hide top icons on very small screens to leave room for hamburger */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="container header-content">
+            <a href="#" class="logo">
+                <img src="logo-dantom-group.png" alt="Dantom Group Logo"
+                    style="height: 75px; width: auto; object-fit: contain;">
+            </a>
+
+            <ul class="nav-links" id="mobile-menu">
+                <li><a href="#home" style="color: var(--primary);">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+
+            <div class="menu-toggle" onclick="document.getElementById('mobile-menu').classList.toggle('active')">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Transformando processos, <span style="color: var(--primary);">potencializando</span> resultados</h1>
+                <p>Somos um escritório especializado em <span style="color: var(--primary);">soluções eficientes</span>:
+                    cálculos trabalhistas, backoffice jurídico,
+                    automações e sistemas sob medida, criados a partir das dores diárias para facilitar e acelerar a
+                    rotina do seu negócio.</p>
+                <div class="hero-btns">
+                    <a href="#" class="btn btn-primary">Nossos Serviços</a>
+                    <a href="#" class="btn btn-outline"><i class="fa-solid fa-play"></i> Como Funciona</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="gif.gif" alt="Dantom Group Solution" class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards / Strip -->
+    <div class="awards">
+        <div class="container">
+            <div class="awards-grid">
+                <h3><i class="fa-solid fa-calculator"></i> CÁLCULOS TRABALHISTAS</h3>
+                <h3><i class="fa-solid fa-briefcase"></i> BACKOFFICE JURÍDICO</h3>
+                <h3><i class="fa-solid fa-robot"></i> AUTOMAÇÃO RPA</h3>
+                <h3><i class="fa-solid fa-laptop-code"></i> SISTEMAS SOB MEDIDA</h3>
+                <h3><i class="fa-solid fa-scale-balanced"></i> SOLUÇÕES JURÍDICAS</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Segment -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="pill-tag">
+                <div class="dot"></div> ABOUT US
+            </div>
+
+            <h2 class="about-heading">
+                Soluções eficientes desenhadas exatamente para a realidade do seu escritório.
+            </h2>
+
+            <div class="about-divider"></div>
+
+            <div class="about-grid">
+                <div class="about-video">
+                    <!-- Placeholder using a dark generated image -->
+                    <img src="about_image.png.png" alt="Workspace"
+                        style="transform: scale(1.14); transform-origin: center;">
+                </div>
+                <div class="about-text">
+                    Nós compreendemos a complexidade e as dores da rotina jurídica e corporativa. Por isso, o Dantom
+                    Group fornece recursos de <span style="color: var(--primary);">alta performance</span> para
+                    desafogar sua equipe.
+                    <br><br>
+                    Não vendemos apenas serviços; entregamos tranquilidade, <span
+                        style="color: var(--primary);">acurácia matemática</span> e infraestrutura
+                    tecnológica para que seu escritório ou empresa escale sem engargalamentos operacionais.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container services-grid">
+            <div>
+                <!-- You can reuse or generate another image for this side -->
+                <img src="services_image.png.png" alt="3D character working" class="services-image"
+                    style="transform: scale(1.15);">
+            </div>
+
+            <div>
+                <div class="pill-tag">
+                    <div class="dot"></div> WHAT WE DO
+                </div>
+
+                <div class="accordion">
+                    <!-- Item 1 -->
+                    <div class="accordion-item active">
+                        <div class="accordion-header">
+                            <h3>Cálculos</h3>
+                            <div class="accordion-icon">-</div>
+                        </div>
+                        <div class="accordion-content">
+                            Elaboração de cálculos trabalhistas e cíveis com máxima agilidade, precisão e forte
+                            embasamento técnico, ajudando a diminuir o passivo e dar suporte concreto à sua tese.
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>Back Office</h3>
+                            <div class="accordion-icon">+</div>
+                        </div>
+                        <div class="accordion-content">
+                            Gestão técnica de rotinas jurídicas e administrativas (cadastro, diligências, controle de
+                            prazos), assumindo o fluxo burocrático para sua equipe focar no core estratégico.
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>Automações (RPA)</h3>
+                            <div class="accordion-icon">+</div>
+                        </div>
+                        <div class="accordion-content">
+                            Desenvolvimento de RPAs (Robotic Process Automation) para captura de andamentos, extração de
+                            dados e peticionamentos em lote, acabando com as tarefas repetitivas.
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>Sistemas</h3>
+                            <div class="accordion-icon">+</div>
+                        </div>
+                        <div class="accordion-content">
+                            Plataformas e integrações Web baseadas unicamente nas dores reais do seu escritório para
+                            centralizar os dados visando facilitar o trabalho diário dos colaboradores.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="portfolio" id="portfolio" style="background-color: #fff; color: var(--bg-body); padding: 80px 0;">
+        <div class="container">
+            <div class="pill-tag">
+                <div class="dot"></div> PORTFOLIO
+            </div>
+
+            <div class="portfolio-header">
+                <h2 style="color: var(--bg-body);">Projetos de automação e dados que garantem resultados</h2>
+                <a href="#" class="view-all" style="color: var(--primary);">Ver Todos <i
+                        class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <img src="portfolio_1.png.png" alt="Automação">
+                    <div
+                        style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,18,15,0.95) 0%, rgba(13,18,15,0) 60%); pointer-events: none; z-index: 1;">
+                    </div>
+                    <div style="position: absolute; bottom: 30px; left: 30px; z-index: 2;">
+                        <h3 style="font-size:24px; color: #fff;">Automação</h3>
+                        <p style="color:var(--primary); font-weight: 800;">Automação de procedimentos</p>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <img src="portfolio_2.png.png" alt="Sistema ERP">
+                    <div
+                        style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,18,15,0.95) 0%, rgba(13,18,15,0) 60%); pointer-events: none; z-index: 1;">
+                    </div>
+                    <div style="position: absolute; bottom: 30px; left: 30px; z-index: 2;">
+                        <h3 style="font-size:24px; color: #fff;">Sistema ERP</h3>
+                        <p style="color:var(--primary); font-weight: 800;">Desenvolvimento Web</p>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <img src="portfolio_3.png.png" alt="Dashboards BI">
+                    <div
+                        style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,18,15,0.95) 0%, rgba(13,18,15,0) 60%); pointer-events: none; z-index: 1;">
+                    </div>
+                    <div style="position: absolute; bottom: 30px; left: 30px; z-index: 2;">
+                        <h3 style="font-size:24px; color: #fff;">Dashboards BI</h3>
+                        <p style="color:var(--primary); font-weight: 800;">Back Office Analytics</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews">
+        <div class="container reviews-grid">
+            <div>
+                <img src="review_image.png.png" alt="Success Illustration" class="services-image"
+                    style="transform: scale(1.89225); transform-origin: center;">
+            </div>
+            <div>
+                <div class="pill-tag">
+                    <div class="dot"></div> Duvidas
+                </div>
+
+                <h3 class="quote-text">
+                    O Dantom Group transforma a dinâmica do seu negócio. Nossas automações de backoffice e a alta
+                    precisão dos nossos cálculos reduzem pela metade o tempo que sua equipe gasta com rotinas
+                    burocráticas.
+                </h3>
+
+                <div class="quote-author">
+                    <div style="width:60px; height:60px; background:#DEB353; border-radius:12px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: 80px 0 40px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 100px;">
+        <div class="container footer-grid"
+            style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 60px;">
+            <div class="footer-col">
+                <a href="#" class="logo" style="margin-bottom: 20px;">
+                    <img src="logo-dantom-group.png" alt="Dantom Group Logo"
+                        style="height: 75px; width: auto; object-fit: contain;">
+                </a>
+                <p style="color: var(--text-muted); margin-bottom: 24px;">Inovação, segurança e eficiência no
+                    desenvolvimento de soluções corporativas.</p>
+            </div>
+            <div>
+                <h4 style="font-size: 1.2rem; margin-bottom: 24px;">Links Rápidos</h4>
+                <ul
+                    style="list-style: none; display: flex; flex-direction: column; gap: 12px; color: var(--text-muted);">
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Serviços</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-size: 1.2rem; margin-bottom: 24px;">Contato</h4>
+                <p style="color: var(--text-muted);">contato@dantomgroup.com</p>
+            </div>
+        </div>
+        <div class="container"
+            style="text-align: center; color: var(--text-muted); padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05);">
+            &copy; 2026 Dantom Group. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget">
+        <div id="chatbot-window">
+            <div class="chat-header">
+                <h3><i class="fa-solid fa-robot"></i> Dantom AI</h3>
+                <i class="fa-solid fa-xmark close-btn" onclick="toggleChat()"></i>
+            </div>
+            <div class="chat-messages" id="chat-box"></div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Digite sua resposta..." onkeypress="handleEnter(event)">
+                <button onclick="processInput()"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <div id="chatbot-btn" onclick="toggleChat()">
+            <i class="fa-solid fa-comment-dots"></i>
+        </div>
+    </div>
+
+    <script>
+        // --- CHATBOT IA LOGIC ---
+        let chatState = 0;
+        let userData = {
+            nome: "",
+            interesse: "",
+            empresa: ""
+        };
+
+        const chatBox = document.getElementById('chat-box');
+        const chatInput = document.getElementById('chat-input');
+
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatbot-window');
+            chatWindow.classList.toggle('active');
+
+            if (chatState === 0 && chatWindow.classList.contains('active')) {
+                // Iniciar Conversa Automatica
+                chatState = 1;
+                addMessage("bot", "Olá! Sou o assistente virtual da Dantom Group! Qual é o seu nome?");
+            }
+        }
+
+        function handleEnter(e) {
+            if (e.key === "Enter") {
+                processInput();
+            }
+        }
+
+        function addMessage(sender, text) {
+            const msgDiv = document.createElement("div");
+            msgDiv.className = `msg ${sender}`;
+            msgDiv.innerHTML = text;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function processInput() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            addMessage("user", text);
+            chatInput.value = "";
+
+            // Delay for responding
+            setTimeout(() => {
+                replyToUser(text);
+            }, 600);
+        }
+
+        function replyToUser(text) {
+            if (chatState === 1) {
+                userData.nome = text; // Salva o nome
+                chatState = 2;
+                addMessage("bot", `Prazer, ${userData.nome}! O que você deseja melhorar na sua operação? Responda com um dos números abaixo:<br><br>1 - Cálculos Trabalhistas<br>2 - Automação RPA<br>3 - Backoffice Juridico<br>4 - Sistemas sob medida`);
+            }
+            else if (chatState === 2) {
+                const map = {
+                    "1": "Cálculos Trabalhistas", "2": "Automação RPA",
+                    "3": "Backoffice Juridico", "4": "Sistemas sob medida"
+                };
+                if (map[text]) {
+                    userData.interesse = map[text];
+                    chatState = 3;
+                    addMessage("bot", `Excelente escolha! Para finalizarmos, você pertence a alguma empresa? (Me diga o nome, ou digite 'Não' / 'Nenhuma')`);
+                } else {
+                    addMessage("bot", "Desculpe, não entendi. Por favor, digite apenas o **número** da opção (ex: 1, 2, 3 ou 4).");
+                }
+            }
+            else if (chatState === 3) {
+                if (text.toLowerCase().includes("não") || text.toLowerCase().includes("nao") || text.toLowerCase() === "nenhuma") {
+                    userData.empresa = "";
+                } else {
+                    userData.empresa = text;
+                }
+
+                addMessage("bot", "Ótimo! Estou te conectando ao atendimento humano no WhatsApp para prosseguirmos...");
+                chatState = 4;
+
+                setTimeout(() => {
+                    enviarWhatsapp();
+                }, 1500);
+            }
+        }
+
+        function enviarWhatsapp() {
+            let msgZAP = `Olá me chamo ${userData.nome}%0Atenho interesse em ${userData.interesse}`;
+            if (userData.empresa !== "") {
+                msgZAP += `%0Avim da empresa ${userData.empresa}`;
+            }
+
+            // INSIRA SEU TELEFONE ABAIXO ex: 5511999999999 (Código PAÍS + DDD + Número)
+            const phoneNumber = "5511999999999";
+            const link = `https://wa.me/${phoneNumber}?text=${msgZAP}`;
+
+            window.open(link, '_blank');
+        }
+
+        // --- MENU MOBILE FECHAR CLICK ---
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.remove('active');
+            });
+        });
+        // Simple Accordion Logic
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+
+                // If it's already active, don't do anything (or toggle if preferred)
+                if (item.classList.contains('active')) return;
+
+                // Remove active from all
+                document.querySelectorAll('.accordion-item').forEach(acc => {
+                    acc.classList.remove('active');
+                    acc.querySelector('.accordion-icon').textContent = '+';
+                });
+
+                // Add active to clicked
+                item.classList.add('active');
+                item.querySelector('.accordion-icon').textContent = '-';
+            });
+        });
+
+        // --- CONGELAR O GIF (WORKAROUND) ---
+        // GIFs rodam infinitamente pelo próprio arquivo. Eles não tem função "pause" na Web.
+        // O código abaixo funciona tirando uma "foto" do último quadro após X milissegundos
+        // e substituindo o GIF animado por essa foto estática.
+
+        // ** COLOQUE AQUI OS SEGUNDOS EXATOS QUE SEU GIF DURA (em milissegundos) **
+        // Exemplo: 4000 = 4 segundos. 2500 = 2,5 segundos.
+        const DURACAO_DO_GIF_EM_MS = 6800;
+
+        window.addEventListener('load', function () {
+            const gifImage = document.querySelector('.hero-image');
+            if (gifImage && gifImage.src.includes('.gif')) {
+                setTimeout(() => {
+                    // Prepara uma transição sutil (meio segundo)
+                    gifImage.style.transition = "opacity 0.6s ease";
+                    gifImage.style.opacity = "0";
+
+                    setTimeout(() => {
+                        // Troca a imagem pela Logo Oficial
+                        gifImage.src = 'logo-dantom-group.png';
+                        // Retorna a opacidade para mostrar a Nova Imagem
+                        gifImage.style.opacity = "1";
+                    }, 600);
+
+                }, DURACAO_DO_GIF_EM_MS);
+            }
+        });
+    </script>
+</body>
+
+</html>
