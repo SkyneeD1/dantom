@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Funciona — Dantom Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .page-hero { padding:160px 0 80px; border-bottom:1px solid rgba(222,179,83,0.1); }
+        .page-hero h1 { font-size:clamp(2.8rem,4.5vw,4.5rem); font-weight:800; letter-spacing:-2px; line-height:1.05; margin-bottom:20px; }
+        .page-hero p { color:var(--text-muted); font-size:1.1rem; max-width:580px; line-height:1.75; }
+
+        /* ETAPAS */
+        .steps-section { padding:100px 0; }
+        .steps-section h2 { font-size:clamp(2rem,3vw,3rem); font-weight:800; letter-spacing:-1px; margin-bottom:16px; }
+        .steps-section .sub { color:var(--text-muted); font-size:1.05rem; margin-bottom:70px; max-width:520px; }
+
+        .steps-list { display:flex; flex-direction:column; gap:0; }
+        .step-item {
+            display:grid; grid-template-columns:80px 1fr;
+            gap:40px; padding:48px 0;
+            border-bottom:1px solid rgba(255,255,255,0.07);
+            align-items:start;
+        }
+        .step-item:last-child { border-bottom:none; }
+        .step-number {
+            width:64px; height:64px;
+            border-radius:50%; border:2px solid rgba(222,179,83,0.3);
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.4rem; font-weight:800; color:var(--primary);
+            flex-shrink:0; background:rgba(222,179,83,0.06);
+        }
+        .step-content h3 { font-size:1.6rem; font-weight:800; margin-bottom:12px; letter-spacing:-0.5px; }
+        .step-content p { color:var(--text-muted); font-size:1.02rem; line-height:1.8; max-width:640px; }
+        .step-content .step-tag {
+            display:inline-block; background:rgba(222,179,83,0.1);
+            border:1px solid rgba(222,179,83,0.25); color:var(--primary);
+            font-size:0.72rem; font-weight:700; letter-spacing:0.1em;
+            text-transform:uppercase; padding:4px 12px; border-radius:50px;
+            margin-bottom:16px;
+        }
+
+        /* DIFERENCIAIS */
+        .diff-section { padding:100px 0; background:rgba(0,0,0,0.4); }
+        .diff-section h2 { font-size:clamp(2rem,3vw,3rem); font-weight:800; letter-spacing:-1px; margin-bottom:60px; }
+        .diff-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+        .diff-card {
+            background:var(--bg-card); border:1px solid rgba(255,255,255,0.07);
+            border-radius:16px; padding:36px 30px;
+            transition:border-color .3s, transform .3s;
+        }
+        .diff-card:hover { border-color:rgba(222,179,83,0.3); transform:translateY(-4px); }
+        .diff-icon { font-size:2rem; color:var(--primary); margin-bottom:20px; }
+        .diff-card h3 { font-size:1.2rem; font-weight:700; margin-bottom:12px; }
+        .diff-card p { color:var(--text-muted); font-size:0.93rem; line-height:1.7; }
+
+        /* FAQ */
+        .faq-section { padding:100px 0; }
+        .faq-section h2 { font-size:clamp(2rem,3vw,3rem); font-weight:800; letter-spacing:-1px; margin-bottom:60px; }
+        .faq-list { display:flex; flex-direction:column; max-width:800px; }
+        .faq-item { border-bottom:1px solid rgba(255,255,255,0.08); }
+        .faq-header { display:flex; justify-content:space-between; align-items:center; padding:26px 0; cursor:pointer; }
+        .faq-header h3 { font-size:1.08rem; font-weight:700; }
+        .faq-icon { color:var(--primary); font-size:1rem; transition:transform .3s; flex-shrink:0; margin-left:20px; }
+        .faq-item.open .faq-icon { transform:rotate(45deg); }
+        .faq-body { max-height:0; overflow:hidden; transition:max-height .4s ease; }
+        .faq-item.open .faq-body { max-height:300px; }
+        .faq-body p { color:var(--text-muted); font-size:0.97rem; line-height:1.75; padding-bottom:24px; }
+
+        /* CTA */
+        .cta-strip { background:rgba(222,179,83,0.05); border-top:1px solid rgba(222,179,83,0.12); padding:80px 0; text-align:center; }
+        .cta-strip h2 { font-size:clamp(1.8rem,3vw,3rem); font-weight:800; margin-bottom:12px; letter-spacing:-1px; }
+        .cta-strip p { color:var(--text-muted); margin-bottom:36px; font-size:1.05rem; }
+        .cta-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+        @media(max-width:768px){
+            .diff-grid { grid-template-columns:1fr; }
+            .step-item { grid-template-columns:1fr; gap:16px; }
+        }
+    </style>
+</head>
+<body>
+
+<header id="main-header">
+    <nav class="container header-content">
+        <a href="index.html" class="logo"><img src="logo-dantom-group.png" alt="Dantom Group"></a>
+        <ul class="nav-links" id="mobile-menu">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="servicos.html">Serviços</a></li>
+            <li><a href="como-funciona.html" class="active">Como Funciona</a></li>
+            <li><a href="portfolio.html">Portfólio</a></li>
+            <li><a href="index.html#about">Sobre</a></li>
+            <li><a href="https://wa.me/5511999999999" target="_blank" class="nav-cta">Falar Conosco</a></li>
+        </ul>
+        <div class="menu-toggle" onclick="document.getElementById('mobile-menu').classList.toggle('active')">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+</header>
+
+<section class="page-hero">
+    <div class="container">
+        <div class="pill-tag"><div class="dot"></div> COMO FUNCIONA</div>
+        <h1>Do primeiro contato<br>à <span style="color:var(--primary);">entrega do resultado</span></h1>
+        <p>Um processo simples, transparente e sem burocracia. Entendemos sua necessidade, montamos a solução e entregamos com precisão.</p>
+    </div>
+</section>
+
+<!-- ETAPAS -->
+<section class="steps-section">
+    <div class="container">
+        <h2>O processo em <span style="color:var(--primary);">4 etapas</span></h2>
+        <p class="sub">Do contato inicial à entrega — tudo acontece de forma ágil e sem complicação.</p>
+
+        <div class="steps-list">
+            <div class="step-item">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <span class="step-tag">Primeiro contato</span>
+                    <h3>Você nos conta o problema</h3>
+                    <p>Tudo começa com uma conversa. Você entra em contato pelo WhatsApp ou pelo nosso chatbot e descreve o que precisa — seja um cálculo urgente, a necessidade de organizar o back office, automatizar uma rotina ou desenvolver um sistema. Sem formulários complicados, sem reuniões desnecessárias.</p>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <span class="step-tag">Análise</span>
+                    <h3>Analisamos e montamos a proposta</h3>
+                    <p>Nossa equipe analisa sua necessidade e monta uma proposta personalizada em até 24 horas. Definimos o escopo do trabalho, o prazo de entrega e o investimento — tudo de forma clara e objetiva. Nada de surpresas depois.</p>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <span class="step-tag">Execução</span>
+                    <h3>Executamos com precisão</h3>
+                    <p>Aprovada a proposta, nossa equipe entra em ação. Para cálculos, trabalhamos com base na legislação atualizada e nas informações que você fornece. Para back office e automações, seguimos um processo estruturado com acompanhamento próximo. Para sistemas, desenvolvemos em etapas com validações ao longo do caminho.</p>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                    <span class="step-tag">Entrega</span>
+                    <h3>Entregamos e seguimos disponíveis</h3>
+                    <p>Entregamos o resultado dentro do prazo combinado, com toda a documentação necessária. E nosso relacionamento não termina na entrega — estamos disponíveis para esclarecimentos, ajustes e para novas demandas que surgirem.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section class="diff-section">
+    <div class="container">
+        <div class="pill-tag"><div class="dot"></div> POR QUE O DANTOM GROUP</div>
+        <h2>O que nos diferencia</h2>
+        <div class="diff-grid">
+            <div class="diff-card">
+                <div class="diff-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3>Agilidade real</h3>
+                <p>Proposta em até 24 horas. Cálculos entregues no prazo combinado. Sem enrolação, sem burocracia desnecessária.</p>
+            </div>
+            <div class="diff-card">
+                <div class="diff-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Precisão técnica</h3>
+                <p>Mais de 10.000 cálculos entregues com embasamento técnico sólido e conformidade com a legislação vigente.</p>
+            </div>
+            <div class="diff-card">
+                <div class="diff-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                <h3>Soluções sob medida</h3>
+                <p>Nada genérico. Cada solução é desenvolvida a partir da realidade e das necessidades do seu escritório ou empresa.</p>
+            </div>
+            <div class="diff-card">
+                <div class="diff-icon"><i class="fa-solid fa-headset"></i></div>
+                <h3>Atendimento próximo</h3>
+                <p>Você sempre terá alguém disponível para esclarecer dúvidas, acompanhar o andamento e resolver qualquer ponto.</p>
+            </div>
+            <div class="diff-card">
+                <div class="diff-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h3>Resultados mensuráveis</h3>
+                <p>Nossos clientes reduzem pela metade o tempo gasto com rotinas burocráticas. Eficiência que você vê no dia a dia.</p>
+            </div>
+            <div class="diff-card">
+                <div class="diff-icon"><i class="fa-solid fa-lock"></i></div>
+                <h3>Sigilo garantido</h3>
+                <p>Tratamos todas as informações com total confidencialidade. Seus dados e os de seus clientes estão protegidos.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+    <div class="container">
+        <div class="pill-tag"><div class="dot"></div> DÚVIDAS FREQUENTES</div>
+        <h2>Perguntas frequentes</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Quanto tempo leva para receber um cálculo?</h3>
+                    <i class="fa-solid fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-body"><p>Depende da complexidade. Cálculos simples são entregues em até 24 horas. Cálculos mais elaborados, como liquidações de sentença complexas, podem levar de 2 a 5 dias úteis. O prazo exato é definido na proposta.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Preciso assinar algum contrato?</h3>
+                    <i class="fa-solid fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-body"><p>Para serviços pontuais como cálculos avulsos, geralmente não. Para serviços recorrentes como back office e automações, formalizamos um acordo simples que protege as duas partes.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Atendem escritórios de todo o Brasil?</h3>
+                    <i class="fa-solid fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-body"><p>Sim. Nosso atendimento é 100% remoto e atendemos escritórios e empresas em todo o território nacional. A distância não é um obstáculo.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Como envio as informações necessárias para um cálculo?</h3>
+                    <i class="fa-solid fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-body"><p>Pelo WhatsApp, e-mail ou qualquer plataforma de sua preferência. Nossa equipe orienta exatamente quais documentos e informações são necessários para cada tipo de cálculo.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>O que preciso ter para contratar uma automação?</h3>
+                    <i class="fa-solid fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-body"><p>Basta descrever o processo que você quer automatizar. Nossa equipe faz o levantamento técnico e te orienta sobre tudo o que é necessário. Você não precisa ter conhecimento técnico.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+    <div class="container">
+        <h2>Pronto para <span style="color:var(--primary);">começar?</span></h2>
+        <p>Entre em contato agora e receba sua proposta em até 24 horas.</p>
+        <div class="cta-btns">
+            <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-primary"><i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp</a>
+            <a href="servicos.html" class="btn btn-outline">Ver Serviços <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <img src="logo-dantom-group.png" alt="Dantom Group" class="footer-logo">
+                <p class="footer-desc">Inovação, segurança e eficiência no desenvolvimento de soluções corporativas.</p>
+                <div class="footer-socials">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="como-funciona.html">Como Funciona</a></li>
+                    <li><a href="portfolio.html">Portfólio</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="/cdn-cgi/l/email-protection#41222e2f3520352e0125202f352e2c26332e34316f222e2c6f2333"><span class="__cf_email__" data-cfemail="8be8e4e5ffeaffe4cbefeae5ffe4e6ecf9e4fefba5e8e4e6a5e9f9">[email&#160;protected]</span></a></li>
+                    <li><a href="https://wa.me/5511999999999" target="_blank">WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Dantom Group. Todos os direitos reservados.</p>
+            <span>Cálculos · Back Office · Automações · Sistemas</span>
+        </div>
+    </div>
+</footer>
+
+<div id="chatbot-widget">
+    <div id="chatbot-window">
+        <div class="chat-header">
+            <div class="chat-header-left">
+                <div class="chat-avatar-badge">DG</div>
+                <div class="chat-header-info"><h3>Dantom AI</h3><small>Online agora</small></div>
+            </div>
+            <i class="fa-solid fa-xmark close-btn" id="chat-close-btn"></i>
+        </div>
+        <div class="chat-messages" id="chat-box"></div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Digite sua resposta...">
+            <button id="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <button id="chatbot-btn"><i class="fa-solid fa-comment-dots"></i></button>
+</div>
+
+<script>
+window.addEventListener('scroll',function(){ document.getElementById('main-header').classList.toggle('scrolled',window.scrollY>40); });
+// FAQ
+document.querySelectorAll('.faq-header').forEach(function(h){
+    h.addEventListener('click',function(){
+        var item=h.parentElement, open=item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function(f){ f.classList.remove('open'); f.querySelector('.faq-icon').className='fa-solid fa-plus faq-icon'; });
+        if(!open){ item.classList.add('open'); item.querySelector('.faq-icon').className='fa-solid fa-minus faq-icon'; }
+    });
+});
+// Chatbot
+var chatState=0,userData={nome:'',interesse:'',empresa:''};
+var chatBox=document.getElementById('chat-box'),chatInput=document.getElementById('chat-input'),chatWin=document.getElementById('chatbot-window');
+function toggleChat(){ chatWin.classList.toggle('active'); if(chatState===0&&chatWin.classList.contains('active')){ chatState=1; setTimeout(function(){ addMsg('bot','Olá! Sou o assistente da <strong>Dantom Group</strong>. Qual é o seu nome?'); },300); } }
+function addMsg(s,t){ var d=document.createElement('div'); d.className='msg '+s; d.innerHTML=t; chatBox.appendChild(d); chatBox.scrollTop=chatBox.scrollHeight; }
+function processInput(){ var t=chatInput.value.trim(); if(!t)return; addMsg('user',t); chatInput.value=''; setTimeout(function(){ reply(t); },600); }
+function reply(t){
+    if(chatState===1){ userData.nome=t; chatState=2; addMsg('bot','Prazer, <strong>'+t+'</strong>! O que precisa?<br><br><b>1</b> - Cálculos<br><b>2</b> - Back Office<br><b>3</b> - Automação RPA<br><b>4</b> - Sistemas'); }
+    else if(chatState===2){ var m={'1':'Cálculos Trabalhistas','2':'Back Office Jurídico','3':'Automação RPA','4':'Sistemas sob Medida'}; if(m[t]){ userData.interesse=m[t]; chatState=3; addMsg('bot','Você representa alguma empresa?'); } else addMsg('bot','Digite 1, 2, 3 ou 4.'); }
+    else if(chatState===3){ userData.empresa=(/n[ãa]o/i.test(t))?'':t; addMsg('bot','Conectando ao WhatsApp... ✅'); chatState=4; setTimeout(function(){ var msg='Olá, me chamo '+userData.nome+'%0ATenho interesse em '+userData.interesse; if(userData.empresa) msg+='%0AVim da empresa '+userData.empresa; window.open('https://wa.me/5511999999999?text='+msg,'_blank'); },1500); }
+}
+document.getElementById('chatbot-btn').addEventListener('click', toggleChat);
+document.getElementById('chat-close-btn').addEventListener('click', toggleChat);
+document.getElementById('chat-send-btn').addEventListener('click', processInput);
+document.getElementById('chat-input').addEventListener('keypress', function(e){ if(e.key==='Enter') processInput(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços — Dantom Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .page-hero { padding:160px 0 80px; border-bottom:1px solid rgba(222,179,83,0.1); }
+        .page-hero h1 { font-size:clamp(2.8rem,4.5vw,4.5rem); font-weight:800; letter-spacing:-2px; line-height:1.05; margin-bottom:20px; }
+        .page-hero p { color:var(--text-muted); font-size:1.1rem; max-width:580px; line-height:1.75; }
+
+        .service-block { padding:100px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+        .service-block:last-of-type { border-bottom:none; }
+        .service-block-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+        .service-block-grid.reverse { direction:rtl; }
+        .service-block-grid.reverse > * { direction:ltr; }
+
+        .service-icon-big {
+            width:72px; height:72px; border-radius:16px;
+            background:rgba(222,179,83,0.1); border:1px solid rgba(222,179,83,0.25);
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.8rem; color:var(--primary); margin-bottom:28px;
+        }
+        .service-block h2 { font-size:clamp(2rem,3vw,3rem); font-weight:800; letter-spacing:-1px; margin-bottom:20px; line-height:1.1; }
+        .service-block p { color:var(--text-muted); font-size:1.05rem; line-height:1.8; margin-bottom:20px; }
+        .service-features { list-style:none; display:flex; flex-direction:column; gap:14px; margin:28px 0 36px; }
+        .service-features li { display:flex; align-items:flex-start; gap:14px; color:var(--text-muted); font-size:0.97rem; line-height:1.6; }
+        .service-features li::before { content:'✦'; color:var(--primary); flex-shrink:0; font-size:0.75rem; margin-top:4px; }
+        .service-img-wrap {
+            width:130%; overflow:visible;
+            background:transparent;
+            display:flex; align-items:center; justify-content:center;
+        }
+        .service-img {
+            width:100%; height:auto;
+            object-fit:contain; object-position:center;
+            display:block; border-radius:0;
+            transition:transform .5s;
+        }
+        .service-img-wrap:hover .service-img { transform:scale(1.04); }
+
+        .cta-strip { background:rgba(222,179,83,0.05); border-top:1px solid rgba(222,179,83,0.12); border-bottom:1px solid rgba(222,179,83,0.12); padding:80px 0; text-align:center; }
+        .cta-strip h2 { font-size:clamp(1.8rem,3vw,3rem); font-weight:800; margin-bottom:12px; letter-spacing:-1px; }
+        .cta-strip p { color:var(--text-muted); margin-bottom:36px; font-size:1.05rem; }
+        .cta-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+        @media(max-width:968px){
+            .service-block-grid { grid-template-columns:1fr; gap:40px; }
+            .service-block-grid.reverse { direction:ltr; }
+        }
+    </style>
+</head>
+<body>
+
+<header id="main-header">
+    <nav class="container header-content">
+        <a href="index.html" class="logo"><img src="logo-dantom-group.png" alt="Dantom Group"></a>
+        <ul class="nav-links" id="mobile-menu">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="servicos.html" class="active">Serviços</a></li>
+            <li><a href="como-funciona.html">Como Funciona</a></li>
+            <li><a href="portfolio.html">Portfólio</a></li>
+            <li><a href="index.html#about">Sobre</a></li>
+            <li><a href="https://wa.me/5511999999999" target="_blank" class="nav-cta">Falar Conosco</a></li>
+        </ul>
+        <div class="menu-toggle" onclick="document.getElementById('mobile-menu').classList.toggle('active')">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+</header>
+
+<!-- HERO DA PÁGINA -->
+<section class="page-hero">
+    <div class="container">
+        <div class="pill-tag"><div class="dot"></div> NOSSOS SERVIÇOS</div>
+        <h1>Tudo que seu escritório<br>precisa em <span style="color:var(--primary);">um só lugar</span></h1>
+        <p>Desenvolvemos soluções a partir das dificuldades reais da rotina jurídica e corporativa. Cada serviço é pensado para eliminar o que atrasa a sua equipe.</p>
+    </div>
+</section>
+
+<!-- CÁLCULOS -->
+<section class="service-block" id="calculos">
+    <div class="container service-block-grid">
+        <div>
+            <div class="service-icon-big"><i class="fa-solid fa-calculator"></i></div>
+            <div class="pill-tag"><div class="dot"></div> SERVIÇO 01</div>
+            <h2>Cálculos Trabalhistas</h2>
+            <p>Elaboramos cálculos com máxima agilidade, precisão técnica e forte embasamento jurídico. Mais de <strong style="color:var(--primary);">10.000 cálculos entregues</strong> para escritórios e empresas em todo o Brasil.</p>
+            <p>Nossos cálculos ajudam a reduzir o passivo trabalhista, dar suporte concreto à tese do advogado e garantir que os valores apresentados em juízo sejam precisos e bem fundamentados.</p>
+            <ul class="service-features">
+                <li>Rescisões contratuais e verbas indenizatórias</li>
+				<li>Horas extras, adicional noturno, insalubridade e periculosidade</li>
+				<li>Férias proporcionais, 13º salário e FGTS</li>
+				<li>Cálculos para contestações e subsídios à defesa</li>
+				<li>Impugnação de cálculos e manifestações técnicas</li>
+				<li>Cálculos de liquidação de sentença trabalhista</li>
+				<li>Correção monetária e juros conforme tabela vigente</li>
+				<li>Análise de passivo e provisionamento trabalhista</li>
+				<li>Planilhas detalhadas e laudos técnicos</li>
+            </ul>
+            <a href="https://wa.me/5511999999999?text=Olá, tenho interesse em Cálculos Trabalhistas" target="_blank" class="btn btn-primary">Solicitar Cálculo <i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <div>
+            <div class="service-img-wrap"><img src="about_image.png.png" alt="Cálculos Trabalhistas" class="service-img"></div>
+        </div>
+    </div>
+</section>
+
+<!-- BACK OFFICE -->
+<section class="service-block" id="backoffice" style="background:rgba(0,0,0,0.3);">
+    <div class="container service-block-grid reverse">
+        <div>
+            <div class="service-icon-big"><i class="fa-solid fa-briefcase"></i></div>
+            <div class="pill-tag"><div class="dot"></div> SERVIÇO 02</div>
+            <h2>Back Office Jurídico</h2>
+            <p>Assumimos as rotinas operacionais do seu escritório para que sua equipe foque no que realmente gera resultado: atender clientes e construir teses.</p>
+            <p>Já realizamos mais de <strong style="color:var(--primary);">5.000 processos</strong> de back office — cadastros, diligências, controle de prazos e muito mais.</p>
+            <ul class="service-features">
+                <li>Cadastro e atualização de processos nos sistemas</li>
+                <li>Controle e monitoramento de prazos processuais</li>
+                <li>Realização de diligências em cartórios e tribunais</li>
+                <li>Triagem e organização de documentação</li>
+                <li>Acompanhamento de publicações e intimações</li>
+                <li>Relatórios periódicos de andamento</li>
+            </ul>
+            <a href="https://wa.me/5511999999999?text=Olá, tenho interesse em Back Office Jurídico" target="_blank" class="btn btn-primary">Solicitar Back Office <i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <div>
+            <div class="service-img-wrap" style="width:200%;margin-left:-100%;overflow:visible;"><img src="services_image.png.png" alt="Back Office" class="service-img" style="width:100%;height:auto;"></div>
+        </div>
+    </div>
+</section>
+
+<!-- AUTOMAÇÕES -->
+<section class="service-block" id="automacoes">
+    <div class="container service-block-grid">
+        <div>
+            <div class="service-icon-big"><i class="fa-solid fa-robot"></i></div>
+            <div class="pill-tag"><div class="dot"></div> SERVIÇO 03</div>
+            <h2>Automações </h2>
+            <p>Desenvolvemos robôs de processo () que executam tarefas repetitivas automaticamente, 24 horas por dia, sem erros e sem custo adicional de mão de obra.</p>
+            <p>Tecnologia de ponta aplicada diretamente nas dificuldades da sua operação. Cada automação é criada sob medida para o seu fluxo de trabalho.</p>
+            <ul class="service-features">
+                <li>Extração e organização de dados de sistemas</li>
+                <li>Preenchimento automático de formulários e cadastros</li>
+                <li>Integração entre sistemas e plataformas</li>
+                <li>Relatórios e alertas automáticos</li>
+                <li>Automação de rotinas administrativas repetitivas</li>
+                <li>Fluxos personalizados para o seu processo de trabalho</li>
+            </ul>
+            <a href="https://wa.me/5511999999999?text=Olá, tenho interesse em Automações " target="_blank" class="btn btn-primary">Quero uma Automação <i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <div>
+            <div class="service-img-wrap" style="width:250%;margin-left:-60%;overflow:visible;"><img src="portfolio_1.png.png" alt="Automação " class="service-img" style="width:100%;height:auto;background:transparent;"></div>
+        </div>
+    </div>
+</section>
+
+<!-- SISTEMAS -->
+<section class="service-block" id="sistemas" style="background:rgba(0,0,0,0.3);">
+    <div class="container service-block-grid reverse">
+        <div>
+            <div class="service-icon-big"><i class="fa-solid fa-laptop-code"></i></div>
+            <div class="pill-tag"><div class="dot"></div> SERVIÇO 04</div>
+            <h2>Sistemas sob Medida</h2>
+            <p>Desenvolvemos soluções digitais criadas exclusivamente a partir das necessidades do seu escritório ou empresa. Nada genérico — cada projeto começa do zero, pensado para o seu contexto.</p>
+            <p>Do levantamento de requisitos à entrega final, acompanhamos cada etapa para garantir que a solução realmente resolva o problema e se encaixe na rotina da sua equipe.</p>
+            <ul class="service-features">
+                <li>Levantamento detalhado das necessidades antes de qualquer desenvolvimento</li>
+                <li>Soluções desenvolvidas do zero para o seu contexto específico</li>
+                <li>Acompanhamento próximo em todas as etapas do projeto</li>
+                <li>Entrega com documentação e suporte pós-implantação</li>
+            </ul>
+            <a href="https://wa.me/5511999999999?text=Olá, tenho interesse em um Sistema sob Medida" target="_blank" class="btn btn-primary">Quero um Sistema <i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <div>
+            <div class="service-img-wrap" style="width:250%;margin-left:-95%;overflow:visible;"><img src="portfolio_2.png.png" alt="Sistemas sob Medida" class="service-img" style="width:100%;height:auto;background:transparent;"></div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+    <div class="container">
+        <h2>Não sabe por onde começar?</h2>
+        <p>Fale com nosso time. Em minutos entendemos sua necessidade e indicamos o melhor caminho.</p>
+        <div class="cta-btns">
+            <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-primary"><i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp</a>
+            <a href="como-funciona.html" class="btn btn-outline">Ver Como Funciona <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <img src="logo-dantom-group.png" alt="Dantom Group" class="footer-logo">
+                <p class="footer-desc">Inovação, segurança e eficiência no desenvolvimento de soluções corporativas.</p>
+                <div class="footer-socials">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="como-funciona.html">Como Funciona</a></li>
+                    <li><a href="portfolio.html">Portfólio</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="/cdn-cgi/l/email-protection#b8dbd7d6ccd9ccd7f8dcd9d6ccd7d5dfcad7cdc896dbd7d596daca"><span class="__cf_email__" data-cfemail="77141819031603183713161903181a10051802075914181a591505">[email&#160;protected]</span></a></li>
+                    <li><a href="https://wa.me/5511999999999" target="_blank">WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Dantom Group. Todos os direitos reservados.</p>
+            <span>Cálculos · Back Office · Automações · Sistemas</span>
+        </div>
+    </div>
+</footer>
+
+<div id="chatbot-widget">
+    <div id="chatbot-window">
+        <div class="chat-header">
+            <div class="chat-header-left">
+                <div class="chat-avatar-badge">DG</div>
+                <div class="chat-header-info"><h3>Dantom AI</h3><small>Online agora</small></div>
+            </div>
+            <i class="fa-solid fa-xmark close-btn" id="chat-close-btn"></i>
+        </div>
+        <div class="chat-messages" id="chat-box"></div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Digite sua resposta...">
+            <button id="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <button id="chatbot-btn"><i class="fa-solid fa-comment-dots"></i></button>
+</div>
+
+<script>
+window.addEventListener('scroll',function(){ document.getElementById('main-header').classList.toggle('scrolled',window.scrollY>40); });
+var chatState=0,userData={nome:'',interesse:'',empresa:''};
+var chatBox=document.getElementById('chat-box'),chatInput=document.getElementById('chat-input'),chatWin=document.getElementById('chatbot-window');
+function toggleChat(){ chatWin.classList.toggle('active'); if(chatState===0&&chatWin.classList.contains('active')){ chatState=1; setTimeout(function(){ addMsg('bot','Olá! Sou o assistente da <strong>Dantom Group</strong>. Qual é o seu nome?'); },300); } }
+function addMsg(s,t){ var d=document.createElement('div'); d.className='msg '+s; d.innerHTML=t; chatBox.appendChild(d); chatBox.scrollTop=chatBox.scrollHeight; }
+function processInput(){ var t=chatInput.value.trim(); if(!t)return; addMsg('user',t); chatInput.value=''; setTimeout(function(){ reply(t); },600); }
+function reply(t){
+    if(chatState===1){ userData.nome=t; chatState=2; addMsg('bot','Prazer, <strong>'+t+'</strong>! Qual serviço te interessa?<br><br><b>1</b> - Cálculos Trabalhistas<br><b>2</b> - Back Office Jurídico<br><b>3</b> - Automação <br><b>4</b> - Sistemas sob Medida'); }
+    else if(chatState===2){ var m={'1':'Cálculos Trabalhistas','2':'Back Office Jurídico','3':'Automação ','4':'Sistemas sob Medida'}; if(m[t]){ userData.interesse=m[t]; chatState=3; addMsg('bot','Ótimo! Você representa alguma empresa?'); } else addMsg('bot','Digite 1, 2, 3 ou 4.'); }
+    else if(chatState===3){ userData.empresa=(/n[ãa]o/i.test(t))?'':t; addMsg('bot','Perfeito! Conectando ao WhatsApp... ✅'); chatState=4; setTimeout(function(){ var msg='Olá, me chamo '+userData.nome+'%0ATenho interesse em '+userData.interesse; if(userData.empresa) msg+='%0AVim da empresa '+userData.empresa; window.open('https://wa.me/5511999999999?text='+msg,'_blank'); },1500); }
+}
+document.getElementById('chatbot-btn').addEventListener('click', toggleChat);
+document.getElementById('chat-close-btn').addEventListener('click', toggleChat);
+document.getElementById('chat-send-btn').addEventListener('click', processInput);
+document.getElementById('chat-input').addEventListener('keypress', function(e){ if(e.key==='Enter') processInput(); });
+</script>
+</body>
+</html>
