@@ -1,8 +1,11 @@
 name: Deploy via FTP (Locaweb)
+
 on:
   push:
     branches:
       - "main"
+    paths:
+      - "html-version/**"
   workflow_dispatch:
 
 jobs:
@@ -17,5 +20,5 @@ jobs:
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USER }}
           password: ${{ secrets.PASS }}
-          localDir: "." # Use "." se os arquivos estão na raiz, ou o nome da pasta se estiverem nela
+          localDir: "html-version"
           remoteDir: "public_html"
