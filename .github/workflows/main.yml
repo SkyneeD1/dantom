@@ -1,9 +1,9 @@
 name: Deploy via FTP (Locaweb)
+
 on:
   push:
-    branches:
-      - "main"
-  workflow_dispatch:
+    branches: [ "main" ]
+  workflow_dispatch: 
 
 jobs:
   deploy:
@@ -17,5 +17,6 @@ jobs:
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USER }}
           password: ${{ secrets.PASS }}
-          localDir: "."  # Indica a raiz do repositório
+          localDir: "."  # Indica que os arquivos estão na raiz
           remoteDir: "public_html"
+          options: "--passive" # Evita que a conexão trave
