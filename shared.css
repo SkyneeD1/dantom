@@ -14,7 +14,7 @@
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--bg-body);
+    background-color: #13261b;
     background-image: var(--gradient-accent);
     background-attachment: fixed;
     color: var(--text-main);
@@ -26,10 +26,14 @@ a { text-decoration: none; color: inherit; }
 
 /* NAV */
 header {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 500;
     padding: 0px 0;
-    background: rgba(13,18,15,0.96);
-    border-bottom: 1px solid rgba(222,179,83,0.12);
+    background: rgb(14 35 23 / 0%);
+    border-bottom: 1px solid rgb(222 179 83);
     box-shadow: 0 4px 32px rgba(0,0,0,0.5);
     transition: background 0.3s;
 }
